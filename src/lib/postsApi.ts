@@ -6,7 +6,23 @@ export const postsApi = api.injectEndpoints({
     getPosts: builder.query<Post[], void>({
       query: () => "posts",
     }),
+    deletePost: builder.mutation<void, number>({
+      query: (postId) => ({
+        url: `posts/${postId}`,
+        method: "DELETE",
+      }),
+      async onQueryStarted(postId, { dispatch, queryFulfilled }) {
+        // optimistic cache updating
+        await queryFulfilled;
+
+        dispatch(
+          postsApi.util.updateQueryData("getPosts", undefined, (draft) => {
+            return draft.filter((post) => post.id !== postId);
+          })
+        );
+      },
+    }),
   }),
 });
 
-export const { useGetPostsQuery } = postsApi;
+export const { useGetPostsQuery, useDeletePostMutation } = postsApi;
