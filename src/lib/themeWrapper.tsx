@@ -51,6 +51,15 @@ export const ThemeWrapper = ({ children }: { children: ReactNode }) => {
         typography: {
           fontFamily: roboto.style.fontFamily,
         },
+        components: {
+          MuiAppBar: {
+            styleOverrides: {
+              root: {
+                backgroundColor: "#2196f3",
+              },
+            },
+          },
+        },
       }),
     [mode]
   );
