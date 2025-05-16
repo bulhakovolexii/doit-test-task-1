@@ -3,7 +3,6 @@ import { Post, User } from "@/types/json-placeholder-data";
 import { ArrowForward, Delete } from "@mui/icons-material";
 import {
   Avatar,
-  Box,
   Card,
   CardActions,
   CardContent,
