@@ -1,8 +1,5 @@
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
-
-import type { Metadata } from "next";
-import theme from "@/theme";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Metadata } from "next";
+import { AppProviders } from "./providers";
 
 export const metadata: Metadata = {
   title: "DOiT Front-end test task #1",
@@ -18,13 +15,7 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body>
-        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          <ThemeProvider theme={theme}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            {children}
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );
