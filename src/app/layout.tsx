@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { AppProviders } from "./providers";
+import AppBar from "@/components/AppBar";
+import { Box, Container } from "@mui/material";
 
 export const metadata: Metadata = {
   title: "DOiT Front-end test task #1",
@@ -15,7 +17,22 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body>
-        <AppProviders>{children}</AppProviders>
+        <AppProviders>
+          <AppBar />
+          <Container maxWidth="lg">
+            <Box
+              sx={{
+                my: 4,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {children}
+            </Box>
+          </Container>
+        </AppProviders>
       </body>
     </html>
   );
