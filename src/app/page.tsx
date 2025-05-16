@@ -1,7 +1,7 @@
 "use client";
 
-import { Add, AddCircle, List } from "@mui/icons-material";
-import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
+import { AddCircle, List } from "@mui/icons-material";
+import { Button, Stack, Typography, useTheme } from "@mui/material";
 import Link from "next/link";
 
 export default function Home() {
