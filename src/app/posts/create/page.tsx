@@ -1,10 +1,11 @@
 "use client";
 
 import { useAddPostMutation } from "@/lib/postsApi";
-import { Title } from "@mui/icons-material";
+import { Save, Title } from "@mui/icons-material";
 import {
   Box,
   Button,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -28,7 +29,7 @@ export default function CreatePost() {
   const [activeStep, setActiveStep] = useState(0);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
-  const [addPost] = useAddPostMutation();
+  const [addPost, { isLoading }] = useAddPostMutation();
   const {
     register,
     handleSubmit,
@@ -116,7 +117,7 @@ export default function CreatePost() {
           <Button disabled={activeStep === 0} onClick={handleBack}>
             Назад
           </Button>
-          <Button variant="contained" onClick={handleNext}>
+          <Button variant="contained" onClick={handleNext} endIcon={<Save />}>
             {activeStep === steps.length - 1 ? "Зберегти" : "Далі"}
           </Button>
         </Box>
@@ -139,7 +140,12 @@ export default function CreatePost() {
         <Divider />
         <DialogActions>
           <Button onClick={() => handleEdit(0)}>Редагувати</Button>
-          <Button onClick={handleNext} variant="contained">
+          <Button
+            onClick={handleNext}
+            disabled={isLoading}
+            startIcon={isLoading && <CircularProgress size={20} />}
+            variant="contained"
+          >
             Підтвердити
           </Button>
         </DialogActions>
