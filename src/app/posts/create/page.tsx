@@ -51,9 +51,7 @@ export default function CreatePost() {
     if (activeStep === steps.length - 1) {
       try {
         await addPost({ ...data, userId: 1 }).unwrap();
-        setIsDialogOpen(false);
-        setActiveStep(0);
-        router.replace("/posts");
+        router.replace("/posts?created=true");
       } catch (error) {
         console.error("Failed to add post:", error);
       }

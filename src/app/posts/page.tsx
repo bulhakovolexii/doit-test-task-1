@@ -5,21 +5,32 @@ import { useGetPostsQuery } from "@/lib/postsApi";
 import { useGetUsersQuery } from "@/lib/usersApi";
 import { Search as SearchIcon } from "@mui/icons-material";
 import {
+  Alert,
   Fab,
   Grid,
   InputAdornment,
   Skeleton,
+  Snackbar,
   SpeedDialIcon,
   TextField,
 } from "@mui/material";
 import Link from "next/link";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Posts() {
   const { data: posts = [], isLoading: postsIsLoading } = useGetPostsQuery();
   const { data: users = [], isLoading: usersIsLoading } = useGetUsersQuery();
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("created") === "true") {
+      setOpenSnackbar(true);
+    }
+  }, [searchParams]);
 
   const filteredPosts = posts.filter((post) =>
     post.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -68,6 +79,20 @@ export default function Posts() {
       >
         <SpeedDialIcon />
       </Fab>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Пост успішно створено!
+        </Alert>
+      </Snackbar>
     </>
   );
 }
