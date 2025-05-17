@@ -11,6 +11,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
+import Link from "next/link";
 
 export default function PostPreviewCard({
   post,
@@ -22,7 +23,7 @@ export default function PostPreviewCard({
   const [deletePost, { isLoading }] = useDeletePostMutation();
 
   return (
-    <Card sx={{ height: "100%" }}>
+    <Card sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
       <CardHeader
         avatar={<Avatar>{user.name[0]}</Avatar>}
         title={
@@ -47,7 +48,7 @@ export default function PostPreviewCard({
           },
         }}
       />
-      <CardContent>
+      <CardContent sx={{ flexGrow: 1 }}>
         <Typography
           variant="body2"
           sx={{
@@ -61,7 +62,7 @@ export default function PostPreviewCard({
         </Typography>
       </CardContent>
       <CardActions>
-        <IconButton href={`/posts/${post.id}`}>
+        <IconButton href={`/posts/${post.id}`} LinkComponent={Link}>
           <ArrowForward />
         </IconButton>
       </CardActions>

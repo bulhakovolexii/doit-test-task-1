@@ -4,7 +4,15 @@ import PostPreviewCard from "@/components/PostPreviewCard";
 import { useGetPostsQuery } from "@/lib/postsApi";
 import { useGetUsersQuery } from "@/lib/usersApi";
 import { Search as SearchIcon } from "@mui/icons-material";
-import { Grid, InputAdornment, Skeleton, TextField } from "@mui/material";
+import {
+  Fab,
+  Grid,
+  InputAdornment,
+  Skeleton,
+  SpeedDialIcon,
+  TextField,
+} from "@mui/material";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Posts() {
@@ -52,6 +60,14 @@ export default function Posts() {
               );
             })}
       </Grid>
+      <Fab
+        sx={{ position: "fixed", bottom: 16, right: 16 }}
+        color="primary"
+        LinkComponent={Link}
+        href="/posts/create"
+      >
+        <SpeedDialIcon />
+      </Fab>
     </>
   );
 }

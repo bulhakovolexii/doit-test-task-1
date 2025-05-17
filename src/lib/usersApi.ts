@@ -6,7 +6,10 @@ export const postsApi = api.injectEndpoints({
     getUsers: builder.query<User[], void>({
       query: () => "users",
     }),
+    getUser: builder.query<User, number>({
+      query: (userId) => `users/${userId}`,
+    }),
   }),
 });
 
-export const { useGetUsersQuery } = postsApi;
+export const { useGetUsersQuery, useGetUserQuery } = postsApi;
